@@ -18,6 +18,10 @@ h1
 h2
   font-size: 16pt
 
+dl
+  dd
+    margin-left: 16px
+
 form
   input, textarea
     font-size: 13pt
@@ -44,8 +48,10 @@ span.blue
   background-color: blue
   color: white  
 
+label
+  display: block
+
 html
-  head
   body
     width: 100%
     height: 100%
@@ -60,86 +66,97 @@ html
       min-height: 100%
       width: 960px
 
-      .header
+      header
         color: #454545
         height: 120px
         text-align: center
         text-shadow: 2px 2px 2px gray
 
-      .content
-        height: 640px
+      section.editor
+        @include rounded
+        @include shadow
 
-        .editor
-          @include rounded
-          @include shadow
+        background-color: #FEFEFE
+        border: 1px solid #D0D0D0
+        padding: 18px
 
-          background-color: #FEFEFE
-          border: 1px solid #D0D0D0
-          padding: 18px
+        .regexp_entry
+          padding: 8px              
 
-          .regexp_entry
+          input, span
+            display: inline-block
+            margin: 4px
+
+          span
+            color: gray
+            font-size: 24pt
+            vertical-align: middle
+        
+        .test
+          display: table
+          width: 100%
+
+          .data_pane
+            width: 50%
             padding: 8px              
+            display: table-cell
+            
+            textarea
+              font-family: monaco, courier
+              font-size: 10pt
+              font-weight: bold
+              padding: 6pt
+              min-height: 218px
+              width: 100%
+              box-sizing: border-box
+              -moz-box-sizing: border-box
 
-            input, span
-              display: inline-block
+          .match_pane
+            width: 50%
+            padding: 8px
+            display: table-cell
+            
+            #result, #result_groups
+              font-family: monaco, courier
+              font-size: 10pt
+              font-weight: bold
+              padding: 6pt
               margin: 4px
+              min-height: 200px
+              border: 1px solid #D0D0D0
+              box-sizing: border-box 
+              -moz-box-sizing: border-size
 
-            span
-              color: gray
-              font-size: 24pt
-              vertical-align: middle
-          
-          .test
+      section.help
+        @include rounded
+        @include shadow
+        border: 1px solid #D0D0D0
+        margin-top: 32px
+        padding: 8px
+        font-size: 8pt
+        
+        code
+          font-weight: bold 
 
-            .data_pane
-              padding: 8px              
-              float: left
-              width: 420px
-              
-              textarea
-                font-family: monaco, courier
-                font-size: 13pt
-                font-weight: bold
-                padding: 6pt
-                width: 100%
+        table
+          display: table-cell
 
-            .match_pane
-              padding: 8px              
-              margin-left: 50%
-              width: 440px
-              
-              #result, #result_groups
-                font-family: monaco, courier
-                font-size: 13pt
-                font-weight: bold
-                padding: 6pt
-                margin: 4px
-                min-height: 200px
-                border: 1px solid #D0D0D0
-
-        .help
-          @include rounded
-          @include shadow
-          border: 1px solid #D0D0D0
-          margin-top: 32px
-          padding: 8px
-          font-size: 8pt
+          tr
+            td
+              padding-right: 12px
+        
+        .regex_options
+          text-align: center
+          border-top: 1px solid #D0D0D0
+          padding-top: 16px
+          margin-top: 16px
           
           code
-            font-weight: bold 
+            padding-right: 12px
+            padding-left: 12px
 
-          table
-            tr
-              td
-                padding-right: 12px
-          
-          .regex_options
-            text-align: center
-            border-top: 1px solid #D0D0D0
-            padding-top: 16px
-            margin-top: 16px
-            
-            code
-              padding-right: 12px
-              padding-left: 12px
-
+      footer
+        color: grey
+        margin-top: 16px
+        min-height: 32px
+        text-align: center

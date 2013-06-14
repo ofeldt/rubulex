@@ -35,29 +35,54 @@ module Rubulex
 
     def parse
       @data.match(@regex) do |match|
-        colors = ->() do
-          (@colors ||= [:red, :green, :darkorange, :blue].cycle).next
-        end
-        @match_result = @data.dup
-        @match_result.gsub!(@regex) do |match|
-          "<span class='#{colors.call}'>#{match}</span>"
-        end
-        @match_result.gsub!(/\n/,"<br />")
-
-        @match_groups = if match.names.length > 0
-          match.names.each_with_object([]) { |match_name, memo|
-            memo << { match_name.to_sym => match[match_name] }
-          }
-        elsif match.length > 0
-          match.to_a[1..-1].map.with_index { |match, index| { index => match } }
-        end
+        @match_result = render_match_result(@data)
+        @match_groups = render_match_groups(@data)
       end
+    end
+
+    def render_match_result(data)
+      colors = ->() do
+        (@colors ||= [:red, :green, :darkorange, :blue].cycle).next
+      end
+      match_result = @data.dup
+      match_result.gsub!(@regex) do |match|
+        "<span class='#{colors.call}'>#{match}</span>"
+      end
+
+      match_result.gsub!(/\n/,"<br />")
+    end
+
+    def render_match_groups(data)
+      match_groups = []
+      Struct.new("MatchRelation", :name, :text)
+
+      data.gsub(@regex) do |match_text|
+        sub_match = match_text.match(@regex)
+        sub_match_set = []
+
+        (sub_match.length - 1).times do |index|
+          key = sub_match.names[index] || index + 1
+          match_text = sub_match[key]
+
+          sub_match_set << Struct::MatchRelation.new(key, match_text)
+        end
+
+        match_groups << sub_match_set
+      end
+
+      match_groups.map.with_index { |sub_set, index| 
+        group = "<dl><dt>Match #{index + 1}</dt>"
+        group << sub_set.map { |match|
+          "<dd>#{match.name}: #{match.text}</dd>"
+        }.join 
+        group << "</dl>"
+      }.join("<br />")
     end
 
     def result
       {
         match_result: @match_result,
-        match_groups: @match_groups.join("<br />")
+        match_groups: @match_groups
       }
     end
   end

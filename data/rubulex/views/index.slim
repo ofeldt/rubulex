@@ -9,146 +9,144 @@ html
 
   body
     .page
-      .header
+      header
         h1 Rubulex
         h2 a Ruby Regular Expression Editor
 
-      .content
-        .editor
-          form#editor_form method="post" action="regex/test" accept-charset="UTF-8"
-            .regexp_entry
-              label Your regular expression:
-              br
-              span= "/"
-              input id="regex" type="text" tabindex="1" size="60" name="regex"
-              span= "/"
-              input id="regex_options" type="text" tabindex="1" size="6" name="options"
-              span= "/"
-            .test
-              .data_pane
-                label Your test data:
-                textarea id="test_data" tabindex="3" rows="10" name="test_data" cols="56"
-              .match_pane
-                .results
-                  label Your result:
-                  #result
-                .result_groups{ style="display: none;" }
-                  label Your result groups:
-                  #result_groups
-        .help
-          div style="float:left"
-            table
-              tr
-                td
-                  code [abc]
-                td A single character of: a, b or c
-              tr
-                td 
-                  code [^abc]
-                td Any single character except: a, b, or c
-              tr
-                td 
-                  code [a-z]
-                td Any single character in the range a-z
-              tr
-                td 
-                  code [a-zA-Z]
-                td Any single character in the range a-z or A-Z
-              tr
-                td 
-                  code ^
-                td Start of line
-              tr
-                td 
-                  code $
-                td End of line
-              tr
-                td
-                  code \A
-                td Start of string
-              tr
-                td 
-                  code \z
-                td End of string
+      section.editor
+        form#editor_form method="post" action="regex/test" accept-charset="UTF-8"
+          .regexp_entry
+            label Regular expression:
+            br
+            span= "/"
+            input id="regex" type="text" tabindex="1" size="60" name="regex"
+            span= "/"
+            input id="regex_options" type="text" tabindex="1" size="6" name="options"
+            span= "/"
+          .test
+            .data_pane
+              label Test data:
+              textarea id="test_data" tabindex="3" rows="10" name="test_data" cols="56"
+            .match_pane
+              .results
+                label Match results:
+                #result
+              .result_groups{ style="display: none;" }
+                label Match groups:
+                #result_groups
+      section.help
+        div style="float:left"
+          table
+            tr
+              td
+                code [abc]
+              td A single character of: a, b or c
+            tr
+              td 
+                code [^abc]
+              td Any single character except: a, b, or c
+            tr
+              td 
+                code [a-z]
+              td Any single character in the range a-z
+            tr
+              td 
+                code [a-zA-Z]
+              td Any single character in the range a-z or A-Z
+            tr
+              td 
+                code ^
+              td Start of line
+            tr
+              td 
+                code $
+              td End of line
+            tr
+              td
+                code \A
+              td Start of string
+            tr
+              td 
+                code \z
+              td End of string
 
-          div style="float:left"
-            table
-              tr
-                td 
-                  code .
-                td Any single character
-              tr
-                td 
-                  code \s
-                td Any whitespace character
-              tr
-                td 
-                  code \S
-                td Any non-whitespace character
-              tr
-                td 
-                  code \d
-                td Any digit
-              tr
-                td 
-                  code \D
-                td Any non-digit
-              tr
-                td 
-                  code \w
-                td Any word character (letter, number, underscore)
-              tr
-                td 
-                  code \W
-                td Any non-word character
-              tr
-                td 
-                  code \b
-                td Any word boundary
           table
             tr
               td 
-                code (...)
-              td Capture everything enclosed
+                code .
+              td Any single character
             tr
               td 
-                code (a|b)
-              td a or b
+                code \s
+              td Any whitespace character
             tr
               td 
-                code a?
-              td Zero or one of a
+                code \S
+              td Any non-whitespace character
             tr
               td 
-                code a*
-              td Zero or more of a
+                code \d
+              td Any digit
             tr
               td 
-                code a+
-              td One or more of a
+                code \D
+              td Any non-digit
             tr
               td 
-                code a{3}
-              td Exactly 3 of a
+                code \w
+              td Any word character (letter, number, underscore)
             tr
               td 
-                code a{3,}
-              td 3 or more of a
+                code \W
+              td Any non-word character
             tr
               td 
-                code a{3,6}
-              td Between 3 and 6 of a
+                code \b
+              td Any word boundary
+        table
+          tr
+            td 
+              code (...)
+            td Capture everything enclosed
+          tr
+            td 
+              code (a|b)
+            td a or b
+          tr
+            td 
+              code a?
+            td Zero or one of a
+          tr
+            td 
+              code a*
+            td Zero or more of a
+          tr
+            td 
+              code a+
+            td One or more of a
+          tr
+            td 
+              code a{3}
+            td Exactly 3 of a
+          tr
+            td 
+              code a{3,}
+            td 3 or more of a
+          tr
+            td 
+              code a{3,6}
+            td Between 3 and 6 of a
 
-          .regex_options
-            p
-              | options:
-              code i 
-              | case insensitive
-              code m 
-              | make dot match newlines
-              code x
-              | ignore whitespace in regex
-              code o
-              | perform {...} substitutions only once
-      .footer
-        | Copyright © #{Rubulex::VERSION} Expression
+        .regex_options
+          p
+            | options:
+            code i 
+            | case insensitive
+            code m 
+            | make dot match newlines
+            code x
+            | ignore whitespace in regex
+            code o
+            | perform {...} substitutions only once
+      footer 
+        | Copyright © v#{Rubulex::VERSION}
