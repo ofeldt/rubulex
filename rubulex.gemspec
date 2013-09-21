@@ -13,12 +13,12 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/ofeldt/rubulex"
 
   gem.add_runtime_dependency "sinatra", "~> 1.4.3"
-  gem.add_runtime_dependency "sinatra-contrib", "~> 1.4.0"
-  gem.add_runtime_dependency "slim",    "~> 1.3.6"
-  gem.add_runtime_dependency "sass",    "~> 3.2.7"
+  gem.add_runtime_dependency "sinatra-contrib", "~> 1.4.1"
+  gem.add_runtime_dependency "slim",    "~> 2.0.1"
+  gem.add_runtime_dependency "sass",    "~> 3.2.10"
   gem.add_runtime_dependency "bundler", "~> 1.3.5"
 
-  gem.add_development_dependency "rspec", "~> 2.13.0"
+  gem.add_development_dependency "rspec", "~> 2.14.1"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
