@@ -16,7 +16,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency "sinatra-contrib", "~> 1.4.1"
   gem.add_runtime_dependency "slim",    "~> 2.0.1"
   gem.add_runtime_dependency "sass",    "~> 3.2.10"
-  gem.add_runtime_dependency "bundler", "~> 1.3.5"
 
   gem.add_development_dependency "rspec", "~> 2.14.1"
 
