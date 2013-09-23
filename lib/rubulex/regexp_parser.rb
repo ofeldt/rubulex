@@ -1,5 +1,7 @@
 module Rubulex
   class RegexpParser
+    Struct.new("MatchRelation", :name, :text)
+
     def initialize(regex, options, data)
       self.options = options
       self.regex = regex
@@ -15,7 +17,7 @@ module Rubulex
     end
 
     def regex=(regex)
-      @regex = Regexp.new(/#{regex}/, @options)
+      @regex = Regexp.new("#{regex}", @options)
     rescue RegexpError => error
       @regex = //
     end
@@ -53,7 +55,6 @@ module Rubulex
 
     def render_match_groups(data)
       match_groups = []
-      Struct.new("MatchRelation", :name, :text)
 
       data.gsub(@regex) do |match_text|
         sub_match = match_text.match(@regex)
