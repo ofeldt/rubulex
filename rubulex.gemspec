@@ -3,22 +3,22 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'rubulex/version'
 
-Gem::Specification.new do |gem|
-  gem.name          = "rubulex"
-  gem.version       = Rubulex::VERSION
-  gem.authors       = ["Oliver Feldt"]
-  gem.email         = ["oliver.feldt@googlemail.com"]
-  gem.description   = "A simple self-hosted Rubular Clone"
-  gem.summary       = "Rubulex is a simple web application for developing/testing Regular Expression"
-  gem.homepage      = "https://github.com/ofeldt/rubulex"
+Gem::Specification.new do |spec|
+  spec.name          = "rubulex"
+  spec.version       = Rubulex::VERSION
+  spec.authors       = ["Oliver Feldt"]
+  spec.email         = ["oliver.feldt@googlemail.com"]
+  spec.description   = "A simple self-hosted Rubular Clone"
+  spec.summary       = "Rubulex is a simple web application for developing/testing Regular Expression"
+  spec.homepage      = "https://github.com/ofeldt/rubulex"
   spec.license       = "MIT"
 
-  gem.add_runtime_dependency "sinatra", "~> 1.4.3"
-  gem.add_runtime_dependency "sinatra-contrib", "~> 1.4.1"
-  gem.add_runtime_dependency "slim",    "~> 2.0.1"
-  gem.add_runtime_dependency "sass",    "~> 3.2.10"
+  spec.add_runtime_dependency "sinatra", "~> 1.4.6"
+  spec.add_runtime_dependency "sinatra-contrib", "~> 1.4.6"
+  spec.add_runtime_dependency "slim",    "~> 3.0.6"
+  spec.add_runtime_dependency "sass",    "~> 3.4.18"
 
-  gem.add_development_dependency "rspec", "~> 2.14.1"
+  spec.add_development_dependency "rspec", "~> 3.3.0"
 
   spec.files         = `git ls-files`.split($/)
   spec.bindir        = "exe"
