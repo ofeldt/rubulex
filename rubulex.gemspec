@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
   gem.description   = "A simple self-hosted Rubular Clone"
   gem.summary       = "Rubulex is a simple web application for developing/testing Regular Expression"
   gem.homepage      = "https://github.com/ofeldt/rubulex"
+  spec.license       = "MIT"
 
   gem.add_runtime_dependency "sinatra", "~> 1.4.3"
   gem.add_runtime_dependency "sinatra-contrib", "~> 1.4.1"
