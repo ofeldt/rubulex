@@ -17,7 +17,7 @@ module Rubulex
     end
 
     def regex=(regex)
-      @regex = Regexp.new("#{regex}", @options)
+      @regex = Regexp.new(regex, @options)
     rescue RegexpError => error
       @regex = //
     end
