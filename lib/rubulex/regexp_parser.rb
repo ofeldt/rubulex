@@ -56,28 +56,20 @@ module Rubulex
     def render_match_groups(data)
       match_groups = []
 
-      data.gsub(@regex) do |match_text|
-        sub_match = match_text.match(@regex)
-        match_group_count = sub_match.length - 1
-        if match_group_count > 0
-          sub_match_set = []
-
-          match_group_count.times do |index|
-            key = sub_match.names[index] || index + 1
-            match_text = sub_match[key]
-
-            sub_match_set << Struct::MatchRelation.new(key, match_text)
-          end
-
-          match_groups << sub_match_set
+      matches = data.to_enum(:scan, @regex).map { Regexp.last_match }
+      matches.each do |match_data|
+        sub_match_set = []
+        match_data.captures.each_with_index do |match_text, i|
+          sub_match_set << Struct::MatchRelation.new(i+1, match_text)
         end
+          match_groups << sub_match_set
       end
 
-      match_groups.map.with_index { |sub_set, index| 
+      match_groups.map.with_index { |sub_set, index|
         group = "<dl><dt>Match #{index + 1}</dt>"
         group << sub_set.map { |match|
           "<dd>#{match.name}: #{match.text}</dd>"
-        }.join 
+        }.join
         group << "</dl>"
       }.join("<br />")
     end
