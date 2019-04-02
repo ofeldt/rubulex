@@ -47,7 +47,7 @@ module Rubulex
         (@colors ||= [:red, :green, :darkorange, :blue].cycle).next
       end
       data.gsub!(@regex) do |match|
-        "<span class='#{colors.call}'>#{match}</span>"
+        "<span class='#{h(colors.call)}'>#{h(match)}</span>"
       end
 
       data.gsub(/\n/,"<br />")
@@ -66,9 +66,9 @@ module Rubulex
       end
 
       match_groups.map.with_index { |sub_set, index|
-        group = "<dl><dt>Match #{index + 1}</dt>"
+        group = "<dl><dt>Match #{h(index + 1)}</dt>"
         group << sub_set.map { |match|
-          "<dd>#{match.name}: #{match.text}</dd>"
+          "<dd>#{h(match.name)}: #{h(match.text)}</dd>"
         }.join
         group << "</dl>"
       }.join("<br />")
@@ -79,6 +79,11 @@ module Rubulex
         match_result: @match_result,
         match_groups: @match_groups
       }
+    end
+
+    private
+    def h(text)
+      Rack::Utils.escape_html(text)
     end
   end
 
