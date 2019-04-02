@@ -13,7 +13,7 @@ module Rubulex
     end
 
     def data=(data)
-      @data = data[0..4095] || "" 
+      @data = data[0..4095] || ""
     end
 
     def regex=(regex)
@@ -25,12 +25,12 @@ module Rubulex
     def options=(options)
       options = options.match(/(?<options>(?<option>[imxo]){,4})/)[:options].split(//)
 
-      options_lookup_table = Hash.new(0) 
+      options_lookup_table = Hash.new(0)
       options_lookup_table["i"] = Regexp::IGNORECASE
       options_lookup_table["m"] = Regexp::MULTILINE
       options_lookup_table["x"] = Regexp::EXTENDED
 
-      @options = options.inject(0) do |result, option| 
+      @options = options.inject(0) do |result, option|
         result | options_lookup_table[option]
       end
     end
