@@ -3,7 +3,7 @@
 Rubulex is a simple self-hosted Sinatra Rubular clone.
 
 
-![Screenshot](docs/screenshot.png)
+![Screenshot](docs/screenshot.png?raw=true)
 
 
 ## Installation
