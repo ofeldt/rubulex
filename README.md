@@ -2,6 +2,10 @@
 
 Rubulex is a simple self-hosted Sinatra Rubular clone.
 
+
+![Screenshot](docs/screenshot.png)
+
+
 ## Installation
 
     $ gem install rubulex
