@@ -68,7 +68,7 @@ module Rubulex
       match_groups.map.with_index { |sub_set, index|
         group = "<dl><dt>Match #{h(index + 1)}</dt>"
         group << sub_set.map { |match|
-          "<dd>#{h(match.name)}: #{h(match.text)}</dd>"
+          "<dd>#{h(match.name)}: #{h(match.text).gsub(/\n/,"<br />")}</dd>"
         }.join
         group << "</dl>"
       }.join("<br />")
