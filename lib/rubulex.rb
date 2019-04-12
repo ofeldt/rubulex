@@ -2,7 +2,7 @@ require "json"
 require "sinatra"
 require "sinatra/json"
 require "slim"
-require "sass"
+require "sassc"
 
 require "rubulex/version"
 require "rubulex/app"

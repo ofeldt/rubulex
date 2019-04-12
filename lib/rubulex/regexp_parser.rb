@@ -13,7 +13,7 @@ module Rubulex
     end
 
     def data=(data)
-      @data = data[0..4095] || "" 
+      @data = data[0..4095] || ""
     end
 
     def regex=(regex)
@@ -25,12 +25,12 @@ module Rubulex
     def options=(options)
       options = options.match(/(?<options>(?<option>[imxo]){,4})/)[:options].split(//)
 
-      options_lookup_table = Hash.new(0) 
+      options_lookup_table = Hash.new(0)
       options_lookup_table["i"] = Regexp::IGNORECASE
       options_lookup_table["m"] = Regexp::MULTILINE
       options_lookup_table["x"] = Regexp::EXTENDED
 
-      @options = options.inject(0) do |result, option| 
+      @options = options.inject(0) do |result, option|
         result | options_lookup_table[option]
       end
     end
@@ -47,7 +47,7 @@ module Rubulex
         (@colors ||= [:red, :green, :darkorange, :blue].cycle).next
       end
       data.gsub!(@regex) do |match|
-        "<span class='#{colors.call}'>#{match}</span>"
+        "<span class='#{h(colors.call)}'>#{h(match)}</span>"
       end
 
       data.gsub(/\n/,"<br />")
@@ -56,28 +56,20 @@ module Rubulex
     def render_match_groups(data)
       match_groups = []
 
-      data.gsub(@regex) do |match_text|
-        sub_match = match_text.match(@regex)
-        match_group_count = sub_match.length - 1
-        if match_group_count > 0
-          sub_match_set = []
-
-          match_group_count.times do |index|
-            key = sub_match.names[index] || index + 1
-            match_text = sub_match[key]
-
-            sub_match_set << Struct::MatchRelation.new(key, match_text)
-          end
-
-          match_groups << sub_match_set
+      matches = data.to_enum(:scan, @regex).map { Regexp.last_match }
+      matches.each do |match_data|
+        sub_match_set = []
+        match_data.captures.each_with_index do |match_text, i|
+          sub_match_set << Struct::MatchRelation.new(i+1, match_text)
         end
+          match_groups << sub_match_set
       end
 
-      match_groups.map.with_index { |sub_set, index| 
-        group = "<dl><dt>Match #{index + 1}</dt>"
+      match_groups.map.with_index { |sub_set, index|
+        group = "<dl><dt>Match #{h(index + 1)}</dt>"
         group << sub_set.map { |match|
-          "<dd>#{match.name}: #{match.text.gsub(/\n/,"<br />")}</dd>"
-        }.join 
+          "<dd>#{h(match.name)}: #{h(match.text).gsub(/\n/,"<br />")}</dd>"
+        }.join
         group << "</dl>"
       }.join("<br />")
     end
@@ -87,6 +79,11 @@ module Rubulex
         match_result: @match_result,
         match_groups: @match_groups
       }
+    end
+
+    private
+    def h(text)
+      Rack::Utils.escape_html(text)
     end
   end
 
